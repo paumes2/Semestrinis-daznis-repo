@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <ssd1306.h>
 #include <fonts.h>
-
+#include "mano.h"
 
 /* USER CODE END Includes */
 
@@ -32,7 +32,7 @@
 /* USER CODE BEGIN PTD */
 #define IDLE   0
 #define DONE   1
-#define F_CLK  72000000UL
+#define F_CLK  15400000UL
 
 /* USER CODE END PTD */
 
@@ -45,6 +45,7 @@ volatile uint32_t T2 = 0;
 volatile uint32_t ticks = 0;
 volatile uint16_t TIM2_OVC = 0;
 float frequency = 0;
+int cnt=0;
 
 /* USER CODE END PD */
 
@@ -140,7 +141,8 @@ int main(void)
 	
 	HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
-
+	
+	cnt=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,9 +152,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		HAL_Delay(1000);
-		DisplayInfo();
-		Uart();
+		if(cnt==1000)
+		{
+			DisplayInfo();
+			Uart();
+			cnt=0;
+		}
   }
   /* USER CODE END 3 */
 }
@@ -383,7 +388,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim)
         if(T2>T1){
         ticks = (T2 + (TIM2_OVC * 65536)) - T1;
         frequency = ((F_CLK/ticks));
-				frequency = frequency/5;
+				frequency = frequency/1;
         }
         state = IDLE;
     }
