@@ -76,6 +76,8 @@ static void MX_I2C3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t TxBuffer[30];
+
 void DisplayInfo()
 {	
 	#ifndef DISABLE_DISPLAY
@@ -85,6 +87,12 @@ void DisplayInfo()
 	ssd1306_WriteString(string_display,Font_11x18, White);
   ssd1306_UpdateScreen(&hi2c3);
 	#endif
+}
+
+void Uart()
+{
+	sprintf((char*) TxBuffer, "F=%.1f Hz    ", frequency);
+	HAL_UART_Transmit(&huart2, TxBuffer, sizeof(TxBuffer), 100);
 }
 
 /* USER CODE END 0 */
@@ -144,7 +152,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 		HAL_Delay(1000);
 		DisplayInfo();
-		//HAL_Delay(5000);
+		Uart();
   }
   /* USER CODE END 3 */
 }
