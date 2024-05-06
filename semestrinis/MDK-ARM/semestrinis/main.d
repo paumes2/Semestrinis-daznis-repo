@@ -33,6 +33,4 @@ semestrinis/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32L0xx_HAL_Driver\Inc\stm32l0xx_hal_tim_ex.h \
   ..\Drivers\STM32L0xx_HAL_Driver\Inc\stm32l0xx_hal_uart.h \
   ..\Drivers\STM32L0xx_HAL_Driver\Inc\stm32l0xx_hal_uart_ex.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
-  ..\ssd1306-stm32HAL-master\lib\ssd1306.h \
-  ..\ssd1306-stm32HAL-master\lib\fonts.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h
